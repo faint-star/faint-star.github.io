@@ -55,28 +55,35 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="faint-star">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。  追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面  linux下使用tcpxtract分离，其中一张图片即为flag 1tcpxtra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xman-misc">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/xman-misc/index.html">
 <meta property="og:site_name" content="faint-star">
+<meta property="og:description" content="cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。  追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面  linux下使用tcpxtract分离，其中一张图片即为flag 1tcpxtra">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/62858798-e71b1300-bd2d-11e9-8ce1-dc3a0862ac22.png">
+<meta property="og:updated_time" content="2019-08-12T12:09:27.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="faint-star">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="xman-misc">
+<meta name="twitter:description" content="cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。  追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面  linux下使用tcpxtract分离，其中一张图片即为flag 1tcpxtra">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/12/xman-misc/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>faint-star</title>
+  <title>xman-misc | faint-star</title>
   
 
 
@@ -180,10 +187,11 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content page-home">
+          <div id="content" class="content page-post-detail">
             
-  <section id="posts" class="posts-expand">
-      
+
+  <div id="posts" class="posts-expand">
+    
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
@@ -204,9 +212,8 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2019/08/12/xman-misc/" class="post-title-link" itemprop="url">xman-misc</a>
+          <h1 class="post-title" itemprop="name headline">xman-misc
+
             
           </h1>
         
@@ -241,8 +248,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h2 id="cephalopod"><a href="#cephalopod" class="headerlink" title="cephalopod"></a>cephalopod</h2><p>题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。</p>
+        <h2 id="cephalopod"><a href="#cephalopod" class="headerlink" title="cephalopod"></a>cephalopod</h2><p>题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。</p>
 <p><img src="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png" alt="ceph1"></p>
 <p>追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面</p>
 <p><img src="https://user-images.githubusercontent.com/42031559/62858798-e71b1300-bd2d-11e9-8ce1-dc3a0862ac22.png" alt="ceph2"></p>
@@ -274,116 +280,43 @@
 <li><a href="https://github.com/MarioVilas/write-ups/tree/master/defkthon-ctf/misc-300" target="_blank" rel="noopener">https://github.com/MarioVilas/write-ups/tree/master/defkthon-ctf/misc-300</a></li>
 </ul>
 
-          
-        
-      
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/11/xman/" rel="next" title="XMAN-2019-福州营">
+                  <i class="fa fa-chevron-left"></i> XMAN-2019-福州营
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/11/xman/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="faint-star">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-              
-              <a href="/2019/08/11/xman/" class="post-title-link" itemprop="url">XMAN-2019-福州营</a>
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-08-11 17:55:59" itemprop="dateCreated datePublished" datetime="2019-08-11T17:55:59+08:00">2019-08-11</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-12 11:06:33" itemprop="dateModified" datetime="2019-08-12T11:06:33+08:00">2019-08-12</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <p>该从何说起呢，我记得大一的寒假和中国农大的同学一起参观了北京的几所高校，那个时候自己惊叹于别人“大学之楼大”，确从未曾接触过那些优秀高校的学生，心里暗自羡慕，说以后也要去那种学校读书。而这次在夏令营，我每天做题、往返于福大教学区和生活区之间，我内心并无太多波动，仿佛大学就该是这样，因为太过符合心中的期待而感觉过于自然，我知道这是因为夏令营把所有爱好安全的人都聚集到一起了，身边都是志同道合的人这是一件很难得的事，在这里学习的9天时间，我感受到和别人的差距。很奇怪，我并没有向学校里绩点比人低那样焦虑，我想的只是我要怎么弥补自己的基础知识，要怎么向大佬请教，要怎么搞懂这道题。大佬们很强，有名校学长带着入门的；有自己摸索刷题999+的，看到有这么多人和我一样真正的在搞这个东西，想到自己玩的这么浮躁，还把理由归于方向以至于这么就都只是菜鸟，不禁觉得惭愧。想要变强除了做题、看书、总结没有别的途径，你不会证明基础知识不够牢固，那就继续学，而不是怀疑和放弃。不过一个做总是避免不了成为井底之蛙，你不知道外面的世界，也不知道自己的水平，更不知道自己学得怎么样，这次出来真的是让我见了市面，也明白了要端正学习态度，不能有畏难情绪，希望自己能在这条路上坚持下去。</p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -402,8 +335,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -426,6 +368,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cephalopod"><span class="nav-number">1.</span> <span class="nav-text">cephalopod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Erik-Baleog-and-Olaf"><span class="nav-number">2.</span> <span class="nav-text">Erik-Baleog-and-Olaf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miscellaneous-300"><span class="nav-number">3.</span> <span class="nav-text">Miscellaneous-300</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小小的PDF"><span class="nav-number">4.</span> <span class="nav-text">小小的PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Refference"><span class="nav-number">5.</span> <span class="nav-text">Refference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -521,5 +480,9 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
 </body>
 </html>
