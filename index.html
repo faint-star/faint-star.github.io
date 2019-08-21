@@ -149,6 +149,147 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-stack2"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-08-21 08:29:12" datetime="2019-08-21T00:29:12.000Z"  itemprop="datePublished">2019-08-21</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/08/21/stack2/">stack2</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        程序逻辑:输入几个数，然后可以使用程序提供的4个功能进行操作，直到输入5程序才会退出。
+1puts("1. show numbers\n2. add number\n3. change numb...
+    
+
+        <a href="/2019/08/21/stack2/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn/">pwn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-warmup"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-08-20 23:07:30" datetime="2019-08-20T15:07:30.000Z"  itemprop="datePublished">2019-08-20</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/08/20/warmup/">warmup</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        溢出点:scanf输入字符串的时候没有检查长度
+123char v2[32]; // [esp+10h] [ebp-74h]//...__isoc99_scanf("%s", v2);
+
+逻辑分...
+    
+
+        <a href="/2019/08/20/warmup/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/overflow/">overflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-dice-game"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-08-20 22:11:56" datetime="2019-08-20T14:11:56.000Z"  itemprop="datePublished">2019-08-20</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/08/20/dice-game/">dice-game</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        溢出点:123char buf[55]; // [rsp+0h] [rbp-50h]//...v6 = read(0, buf, 0x50uLL);
+
+读进来的数据刚好能覆盖到rbp指针之前，无...
+    
+
+        <a href="/2019/08/20/dice-game/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn/">pwn</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-XCTF-PWN"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -165,7 +306,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/08/15/XCTF-PWN/">xctf-pwn-level3</a>
+      <a class="post-title-link" href="/2019/08/15/XCTF-PWN/">level3</a>
     </h3>
   
 
@@ -175,7 +316,8 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &quot;Input:\n...
+        level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者/bin/sh字符串，考察的是libc泄露的基本操作
+1234567ssize_t vulnerable_funct...
     
 
         <a href="/2019/08/15/XCTF-PWN/" class="post-more waves-effect waves-button">
@@ -185,7 +327,7 @@
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xctf/">xctf</a></li></ul>
 
     </div>
     
@@ -223,15 +365,18 @@
         cephalopod题目是一个流量包，ceph是一种通信协议，我们用wireshark打开点一下过滤一下只要ceph协议。
 
                 
-                    
-                    
-                
-        ...
+                 ...
     
 
         <a href="/2019/08/12/xman-misc/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/">misc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xctf/">xctf</a></li></ul>
+
     </div>
     
 </article>
@@ -265,7 +410,7 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        该从何说起呢，我记得大一的寒假和中国农大的同学一起参观了北京的几所高校，那个时候自己惊叹于别人“大学之楼大”，确从未曾接触过那些优秀高校的学生，心里暗自羡慕，说以后也要去那种学校读书。而这次在夏令营，我每天做题、往返于福大教学区和生活区之间，我内心并无太多波动，仿佛大学就该是这样，因为太过符合...
+        该从何说起呢，我记得大一的寒假和中国农大的同学一起参观了北京的几所高校，那个时候自己惊叹于别人“大学之楼大”，确从未曾接触过那些优秀高校的学生，心里暗自羡慕，说以后也要去那种学校读书。而这次在夏...
     
 
         <a href="/2019/08/11/xman/" class="post-more waves-effect waves-button">

