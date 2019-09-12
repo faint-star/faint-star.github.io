@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>javaBasic | faint-star</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java,language">
+    <meta name="description" content="Java Package区别类名的命名空间，作用如下  把功能相似或相关的类或接口组织在同一个包中，方便类的查找和使用。 如同文件夹一样，包也采用了树形目录的存储方式。同一个包中的类名字是不同的，不同的包中的类的名字是可以相同的，当同时调用两个不同包中相同类名的类时，应该加上包名加以区别。因此，包可以避免名字冲突。 包也限定了访问权限，拥有包访问权限的类才能访问某个包中的类。Java 使用包（pa">
+<meta name="keywords" content="java,language">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaBasic">
+<meta property="og:url" content="http://yoursite.com/2019/09/02/javaBasic/index.html">
+<meta property="og:site_name" content="faint-star">
+<meta property="og:description" content="Java Package区别类名的命名空间，作用如下  把功能相似或相关的类或接口组织在同一个包中，方便类的查找和使用。 如同文件夹一样，包也采用了树形目录的存储方式。同一个包中的类名字是不同的，不同的包中的类的名字是可以相同的，当同时调用两个不同包中相同类名的类时，应该加上包名加以区别。因此，包可以避免名字冲突。 包也限定了访问权限，拥有包访问权限的类才能访问某个包中的类。Java 使用包（pa">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-08T07:48:54.649Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javaBasic">
+<meta name="twitter:description" content="Java Package区别类名的命名空间，作用如下  把功能相似或相关的类或接口组织在同一个包中，方便类的查找和使用。 如同文件夹一样，包也采用了树形目录的存储方式。同一个包中的类名字是不同的，不同的包中的类的名字是可以相同的，当同时调用两个不同包中相同类名的类时，应该加上包名加以区别。因此，包可以避免名字冲突。 包也限定了访问权限，拥有包访问权限的类才能访问某个包中的类。Java 使用包（pa">
+    
+        <link rel="alternate" type="application/atom+xml" title="faint-star" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">faint-star</h5>
+          <a href="mailto:15348163872@163.com" title="15348163872@163.com" class="mail">15348163872@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/faint-star" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javaBasic</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javaBasic</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-02T10:56:20.000Z" itemprop="datePublished" class="page-time">
+  2019-09-02
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-Package"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java Package</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#抽象方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">抽象方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口"><span class="post-toc-number">3.</span> <span class="post-toc-text">接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-lang包"><span class="post-toc-number">4.</span> <span class="post-toc-text">Java.lang包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程销毁"><span class="post-toc-number">5.</span> <span class="post-toc-text">线程销毁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JVM内存划分"><span class="post-toc-number">6.</span> <span class="post-toc-text">JVM内存划分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组创建的步骤"><span class="post-toc-number">7.</span> <span class="post-toc-text">数组创建的步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GC-垃圾回收机制"><span class="post-toc-number">8.</span> <span class="post-toc-text">GC:垃圾回收机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">9.</span> <span class="post-toc-text">数据类型</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-javaBasic"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javaBasic</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-02 18:56:20" datetime="2019-09-02T10:56:20.000Z"  itemprop="datePublished">2019-09-02</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Java-Package"><a href="#Java-Package" class="headerlink" title="Java Package"></a>Java Package</h2><p>区别类名的命名空间，作用如下</p>
+<ul>
+<li>把功能相似或相关的类或接口组织在同一个包中，方便类的查找和使用。</li>
+<li>如同文件夹一样，包也采用了树形目录的存储方式。同一个包中的类名字是不同的，不同的包中的类的名字是可以相同的，当同时调用两个不同包中相同类名的类时，应该加上包名加以区别。因此，包可以避免名字冲突。</li>
+<li>包也限定了访问权限，拥有包访问权限的类才能访问某个包中的类。Java 使用包（package）这种机制是为了防止命名冲突，访问控制，提供搜索和定位类（class）、接口、枚举（enumerations）和注释（annotation）等。</li>
+</ul>
+<h2 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h2><p>抽象方法只有方法声明，没有方法主体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">xy</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">//错误</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="title">sum</span> <span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口中的属性在不提供修饰符修饰的情况下，会自动加上public static final</p>
+<ul>
+<li><p>属性不能用private，protected,default 修饰，因为默认是public</p>
+</li>
+<li><p>如果属性是基本数据类型，需要赋初始值，若是引用类型，也需要初始化，因为默认有final修饰，必须赋初始值；</p>
+</li>
+<li><p>接口中常规的来说不能够定义方法体，所以无法通过get和set方法获取属性值，所以属性不属于对象，属于类（接口），因为默认使用static修饰。</p>
+</li>
+</ul>
+<h2 id="Java-lang包"><a href="#Java-lang包" class="headerlink" title="Java.lang包"></a>Java.lang包</h2><ul>
+<li>包装类</li>
+<li>String 类</li>
+<li>Math 类     ——    包含函数</li>
+<li>Class 类</li>
+<li>Object 类</li>
+</ul>
+<h2 id="线程销毁"><a href="#线程销毁" class="headerlink" title="线程销毁"></a>线程销毁</h2><p>run()方法的执行结束，start()方法开启一个线程并执行run()方法，start()结束run()不一定结束。start()方法是让线程变成就绪态。</p>
+<h2 id="JVM内存划分"><a href="#JVM内存划分" class="headerlink" title="JVM内存划分"></a>JVM内存划分</h2><ul>
+<li>方法区：存放class和static变量，方法区中包含的都是在程序中唯一的元素</li>
+<li>虚拟机栈：执行引擎每次调用一个函数时，就为这个函数创建一个栈帧并将他入栈。</li>
+<li>本地方法区：与虚拟机栈作用相似，但它为native方法服务（native方法是Java调用非Java代码的接口）</li>
+<li>堆：所有线程共享的区域，在虚拟机启动时创建，所有对象实例及数组都在堆上分配。</li>
+<li>程序计数器：每个线程得有个计数器记录当前执行到哪个指令。</li>
+</ul>
+<p>在栈帧里的基本数据类型必须初始化，而在堆里的基本数据类型有初始值。</p>
+<h2 id="数组创建的步骤"><a href="#数组创建的步骤" class="headerlink" title="数组创建的步骤"></a>数组创建的步骤</h2><ul>
+<li>声明变量</li>
+<li>在堆中用new关键字初始化数组</li>
+<li>把被初始化的数组的地址赋值给声明的变量</li>
+</ul>
+<h2 id="GC-垃圾回收机制"><a href="#GC-垃圾回收机制" class="headerlink" title="GC:垃圾回收机制"></a>GC:垃圾回收机制</h2><p>程序员不需要再手动的控制内存的释放，当JVM发现内存资源紧张的时候，会自动的清理无用的对象，JVM的垃圾回收机制中，判断一个对象是否死亡，并不是根据是否还有对象对其有引用，而是通过可达性分析。对象之间的引用可以抽象成树形结构，通过树根（GC Root）作为起点，从这些树根向下搜索，搜索过的链称为引用链，当一个对象到GC Root没有任何引用链时，证明这个给对象是不可用的，该对象会被判定为可回收对象。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li>基本数据类型：只存放在栈中</li>
+<li>引用数据类型：堆中存放实体，栈中存放地址（new出来的都是引用数据类型）</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-09-08T07:48:54.649Z" itemprop="dateUpdated">2019-09-08 15:48:54</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="faint-star">
+            faint-star
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/language/">language</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/02/javaBasic/&title=《javaBasic》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/02/javaBasic/&title=《javaBasic》 — faint-star&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/02/javaBasic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaBasic》 — faint-star&url=http://yoursite.com/2019/09/02/javaBasic/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/02/javaBasic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/09/05/mysql-base/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mysql-base</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/02/algorithm1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">algorithm1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>faint-star &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/02/javaBasic/&title=《javaBasic》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/02/javaBasic/&title=《javaBasic》 — faint-star&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/02/javaBasic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javaBasic》 — faint-star&url=http://yoursite.com/2019/09/02/javaBasic/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/02/javaBasic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/09/02/javaBasic/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'faint-star';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'faint-star';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>mysql-base | faint-star</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="mysql,basic">
+    <meta name="description" content="关系型数据库是以表的形式存储数据，非关系型数据库是以键值对的形式存储数据 Mysql端口号3306  事务什么是事务 不可分割的操作,假设该操作有ABCD四个步骤组成. 若ABCD四个步骤都成功完成,则认为事务成功. 若ABCD中任意一个步骤操作失败,则认为事务失败  每条sql语句都是一个事务  事务只对DML语句有效,对于DQL无效   事务的ACID 原子性 　原子性是指事务包含的所有操作">
+<meta name="keywords" content="mysql,basic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-base">
+<meta property="og:url" content="http://yoursite.com/2019/09/05/mysql-base/index.html">
+<meta property="og:site_name" content="faint-star">
+<meta property="og:description" content="关系型数据库是以表的形式存储数据，非关系型数据库是以键值对的形式存储数据 Mysql端口号3306  事务什么是事务 不可分割的操作,假设该操作有ABCD四个步骤组成. 若ABCD四个步骤都成功完成,则认为事务成功. 若ABCD中任意一个步骤操作失败,则认为事务失败  每条sql语句都是一个事务  事务只对DML语句有效,对于DQL无效   事务的ACID 原子性 　原子性是指事务包含的所有操作">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-07T02:53:42.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql-base">
+<meta name="twitter:description" content="关系型数据库是以表的形式存储数据，非关系型数据库是以键值对的形式存储数据 Mysql端口号3306  事务什么是事务 不可分割的操作,假设该操作有ABCD四个步骤组成. 若ABCD四个步骤都成功完成,则认为事务成功. 若ABCD中任意一个步骤操作失败,则认为事务失败  每条sql语句都是一个事务  事务只对DML语句有效,对于DQL无效   事务的ACID 原子性 　原子性是指事务包含的所有操作">
+    
+        <link rel="alternate" type="application/atom+xml" title="faint-star" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">faint-star</h5>
+          <a href="mailto:15348163872@163.com" title="15348163872@163.com" class="mail">15348163872@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/faint-star" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mysql-base</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mysql-base</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-05T03:36:21.000Z" itemprop="datePublished" class="page-time">
+  2019-09-05
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事务"><span class="post-toc-number">1.</span> <span class="post-toc-text">事务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是事务"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么是事务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务的ACID"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">事务的ACID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务的使用"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">事务的使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务的并发问题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">事务的并发问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务隔离级别"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">事务隔离级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看隔离级别"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">查看隔离级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置隔离级别"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">设置隔离级别</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-mysql-base"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mysql-base</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-05 11:36:21" datetime="2019-09-05T03:36:21.000Z"  itemprop="datePublished">2019-09-05</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li>关系型数据库是以表的形式存储数据，非关系型数据库是以键值对的形式存储数据</li>
+<li><code>Mysql</code>端口号<code>3306</code></li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h3><ul>
+<li><p>不可分割的操作,假设该操作有ABCD四个步骤组成.</p>
+<p>若ABCD四个步骤都成功完成,则认为事务成功.</p>
+<p>若ABCD中任意一个步骤操作失败,则认为事务失败</p>
+</li>
+<li><p>每条sql语句都是一个事务</p>
+</li>
+<li><p>事务只对DML语句有效,对于DQL无效</p>
+</li>
+</ul>
+<h3 id="事务的ACID"><a href="#事务的ACID" class="headerlink" title="事务的ACID"></a>事务的ACID</h3><ul>
+<li><p>原子性</p>
+<p>　原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚</p>
+</li>
+<li><p>一致性</p>
+<p>一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。</p>
+<p>让数据保持一定上的合理</p>
+<p>一个商品出库时，仓库商品数量减1，对应用户的购物车中商品加1</p>
+</li>
+<li><p>隔离性</p>
+<p>隔离性是当多个用户并发访问数据库时，比如操作同一张表时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离。</p>
+</li>
+<li><p>持久性</p>
+<p>持久性是指一个事务一旦被提交了，就不能再回滚了，已经把数据保存到数据库当中了。</p>
+</li>
+</ul>
+<h3 id="事务的使用"><a href="#事务的使用" class="headerlink" title="事务的使用"></a>事务的使用</h3><ul>
+<li><p>开启事务（start transaction）</p>
+</li>
+<li><p>提交事务（commit）</p>
+<p>所有语句全部执行完毕，没有发生异常,提交事务，更新到数据库当中。</p>
+</li>
+<li><p>回滚事务（rollback）</p>
+<p>当遇到一突发情况，撤销执行的sql语句</p>
+</li>
+</ul>
+<h3 id="事务的并发问题"><a href="#事务的并发问题" class="headerlink" title="事务的并发问题"></a>事务的并发问题</h3><ul>
+<li><p>脏读</p>
+<p>访问到了还没有提交的事务所产生的结果</p>
+<p>解决办法：Read committed！读提交，能解决脏读问题</p>
+</li>
+<li><p>不可重复读</p>
+<p>一个事务范围内两个相同的查询却返回了不同数据，这就是不可重复读</p>
+<p>解决办法：Repeatable read</p>
+</li>
+<li><p>重复读：当事务开启时，不允许其他的事务的<code>UPDATA</code>修改操作</p>
+</li>
+<li><p>幻读：事务开启的时候读到一个结果，事务提交又读到一个结果，两者不一样</p>
+</li>
+<li><p>对应关系：</p>
+<table>
+<thead>
+<tr>
+<th align="center">事务隔离级别</th>
+<th align="center">脏读</th>
+<th align="center">不可重复读</th>
+<th align="center">幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读未提交</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">不可重复读</td>
+<td align="center">否</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">可重复读</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">串行化</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><ul>
+<li>Read uncommitted：就是一个事务可以读取另一个未提交事务的数据</li>
+<li>Read committed：一个事务要等另一个事务提交后才能读取数据</li>
+<li>Repeatable read：就是在开始读取数据（事务开启）时，不再允许修改操作</li>
+<li>Serializable ：在该级别下，事务串行化顺序执行，可以避免脏读、不可重复读与幻读</li>
+</ul>
+<h3 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h3><ul>
+<li><code>select @@global.tx_isolation,@@tx_isolation;</code></li>
+</ul>
+<h3 id="设置隔离级别"><a href="#设置隔离级别" class="headerlink" title="设置隔离级别"></a>设置隔离级别</h3><ul>
+<li><p>全局的：</p>
+<p><code>set global transaction isolation level read committed;</code></p>
+</li>
+<li><p>当前会话：</p>
+<p><code>set session transaction isolation level read committed;</code></p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-09-07T02:53:42.742Z" itemprop="dateUpdated">2019-09-07 10:53:42</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="faint-star">
+            faint-star
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/basic/">basic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/05/mysql-base/&title=《mysql-base》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/05/mysql-base/&title=《mysql-base》 — faint-star&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/05/mysql-base/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mysql-base》 — faint-star&url=http://yoursite.com/2019/09/05/mysql-base/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/05/mysql-base/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/09/11/JavaSpring/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaSpring</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/02/javaBasic/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">javaBasic</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>faint-star &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/05/mysql-base/&title=《mysql-base》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/05/mysql-base/&title=《mysql-base》 — faint-star&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/05/mysql-base/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mysql-base》 — faint-star&url=http://yoursite.com/2019/09/05/mysql-base/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/05/mysql-base/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/09/05/mysql-base/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'faint-star';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'faint-star';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
