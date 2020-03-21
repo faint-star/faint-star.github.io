@@ -29,10 +29,15 @@
 <meta property="og:site_name" content="faint-star">
 <meta property="og:description" content="Java Package区别类名的命名空间，作用如下  把功能相似或相关的类或接口组织在同一个包中，方便类的查找和使用。 如同文件夹一样，包也采用了树形目录的存储方式。同一个包中的类名字是不同的，不同的包中的类的名字是可以相同的，当同时调用两个不同包中相同类名的类时，应该加上包名加以区别。因此，包可以避免名字冲突。 包也限定了访问权限，拥有包访问权限的类才能访问某个包中的类。Java 使用包（pa">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-08T07:48:54.649Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/68184009-e7e3de00-ffd8-11e9-8ef5-a9dafd96d698.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/68184063-00ec8f00-ffd9-11e9-8092-f3f0089c6504.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/68184091-13ff5f00-ffd9-11e9-80df-2cf300e279bd.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/42031559/68200464-e2978b00-fffa-11e9-802d-bd615fa6774a.png">
+<meta property="og:updated_time" content="2019-11-05T11:54:39.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaBasic">
 <meta name="twitter:description" content="Java Package区别类名的命名空间，作用如下  把功能相似或相关的类或接口组织在同一个包中，方便类的查找和使用。 如同文件夹一样，包也采用了树形目录的存储方式。同一个包中的类名字是不同的，不同的包中的类的名字是可以相同的，当同时调用两个不同包中相同类名的类时，应该加上包名加以区别。因此，包可以避免名字冲突。 包也限定了访问权限，拥有包访问权限的类才能访问某个包中的类。Java 使用包（pa">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/42031559/68184009-e7e3de00-ffd8-11e9-8ef5-a9dafd96d698.png">
     
         <link rel="alternate" type="application/atom+xml" title="faint-star" href="/atom.xml">
     
@@ -158,7 +163,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-Package"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java Package</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#抽象方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">抽象方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口"><span class="post-toc-number">3.</span> <span class="post-toc-text">接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-lang包"><span class="post-toc-number">4.</span> <span class="post-toc-text">Java.lang包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程销毁"><span class="post-toc-number">5.</span> <span class="post-toc-text">线程销毁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JVM内存划分"><span class="post-toc-number">6.</span> <span class="post-toc-text">JVM内存划分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组创建的步骤"><span class="post-toc-number">7.</span> <span class="post-toc-text">数组创建的步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GC-垃圾回收机制"><span class="post-toc-number">8.</span> <span class="post-toc-text">GC:垃圾回收机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">9.</span> <span class="post-toc-text">数据类型</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-Package"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java Package</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#抽象方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">抽象方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口"><span class="post-toc-number">3.</span> <span class="post-toc-text">接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java-lang包"><span class="post-toc-number">4.</span> <span class="post-toc-text">Java.lang包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程销毁"><span class="post-toc-number">5.</span> <span class="post-toc-text">线程销毁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JVM"><span class="post-toc-number">6.</span> <span class="post-toc-text">JVM</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类加载机制"><span class="post-toc-number">7.</span> <span class="post-toc-text">类加载机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组创建的步骤"><span class="post-toc-number">8.</span> <span class="post-toc-text">数组创建的步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GC-垃圾回收机制"><span class="post-toc-number">9.</span> <span class="post-toc-text">GC:垃圾回收机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">10.</span> <span class="post-toc-text">数据类型</span></a></li></ol>
         </nav>
     </aside>
 
@@ -208,14 +213,168 @@
 <li>Object 类</li>
 </ul>
 <h2 id="线程销毁"><a href="#线程销毁" class="headerlink" title="线程销毁"></a>线程销毁</h2><p>run()方法的执行结束，start()方法开启一个线程并执行run()方法，start()结束run()不一定结束。start()方法是让线程变成就绪态。</p>
-<h2 id="JVM内存划分"><a href="#JVM内存划分" class="headerlink" title="JVM内存划分"></a>JVM内存划分</h2><ul>
-<li>方法区：存放class和static变量，方法区中包含的都是在程序中唯一的元素</li>
+<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><ul>
+<li><p>JVM内存划分</p>
+<ol>
+<li>方法区：存放已经加载的class信息和static变量、常量等信息，方法区中包含的都是在程序中唯一的元素</li>
 <li>虚拟机栈：执行引擎每次调用一个函数时，就为这个函数创建一个栈帧并将他入栈。</li>
 <li>本地方法区：与虚拟机栈作用相似，但它为native方法服务（native方法是Java调用非Java代码的接口）</li>
 <li>堆：所有线程共享的区域，在虚拟机启动时创建，所有对象实例及数组都在堆上分配。</li>
 <li>程序计数器：每个线程得有个计数器记录当前执行到哪个指令。</li>
+</ol>
+</li>
+<li><p>判断一个对象是否可回收：</p>
+<ol>
+<li><p>引用计数法：为对象添加一个引用计数器，当对象增加一个引用+1，引用失效-1，为0时可以被回收（缺点是无法解决循环引用的问题）</p>
+</li>
+<li><p>可达性分析：以GC Roots为起点进行搜索，可达的对象都是存活的，不可达的对象可以被回收。</p>
+<p>GC Roots可以是：</p>
+<ul>
+<li>虚拟机栈中局部变量比啊中引用的对象</li>
+<li>本地方法栈JNI中引用的对象</li>
+<li>方法去中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
 </ul>
-<p>在栈帧里的基本数据类型必须初始化，而在堆里的基本数据类型有初始值。</p>
+</li>
+<li><p>方法区的回收：方法区主要存放永久代对象，而永久代对象的回收率比新生代低很多，所以在方法区上进行回收性价比不高，主要是对常量池的回收和对类的卸载。</p>
+</li>
+<li><p>finalize()：类似C++的析构函数，用于关闭外部资源。</p>
+</li>
+</ol>
+</li>
+<li><p>Java的四种强度不同的引用类型</p>
+<ol>
+<li><p>强引用：使用new一个新对象的方式创建</p>
+<p>垃圾回收器绝不会回收它，当内存空间不足时，Java虚拟机宁愿抛出异常使程序终止也不会靠随意回收具有强引用的对象来解决内存不足的问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>软引用：被软引用关联的对象只有在内存不够的情况下才会被回收</p>
+<p>使用 <code>SoftReference</code> 类来创建软引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object(); </span><br><span class="line">SoftReference&lt;Object&gt; sf = <span class="keyword">new</span> SoftReference&lt;Object&gt;(obj); </span><br><span class="line">obj = <span class="keyword">null</span>;  <span class="comment">// 使对象只被软引用关联</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>弱引用：被弱引用关联的对象一定会被回收，也就是说他只能存活到下一次垃圾回收发生之前。</p>
+<p>使用 <code>WeakReference</code> 类来创建弱引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object(); </span><br><span class="line">WeakReference&lt;Object&gt; wf = <span class="keyword">new</span> WeakReference&lt;Object&gt;(obj); </span><br><span class="line">obj = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>虚引用：</p>
+<p>又称为幽灵引用或者幻影引用，一个对象是否有虚引用的存在，不会对其生存时间造成影响，也无法通过虚引用得到 一个对象。为一个对象设置虚引用的唯一目的是能在这个对象被回收时收到一个系统通知。<br>使用 <code>PhantomReference</code> 来创建虚引用。</p>
+</li>
+</ol>
+</li>
+<li><p>垃圾回收算法</p>
+<ol>
+<li><p>标记-清除</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/68184009-e7e3de00-ffd8-11e9-8ef5-a9dafd96d698.png" alt="image"></p>
+<p>在标记阶段：程序会检查每个对象是否为活动对象，如果是活动对象，则程序会在对象头部打上标记。</p>
+<p>在清除阶段：会进行对象回收并取消标志位，另外，还会判断回收后的分块与前一个空闲分块是否连续，若连续，会合并这两个分块。回收对象就是把对象作为分块，连接到被称为 “空闲链表” 的单向链表，之后进行分配时只需要遍历这个空闲链表，就可以找到分块。</p>
+<p>不足：</p>
+<p>标记和清除的效率都不高；会产生大量不连续的碎片，导致无法给大对象分配内存。</p>
+</li>
+<li><p>标记-整理</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/68184063-00ec8f00-ffd9-11e9-8092-f3f0089c6504.png" alt="image"></p>
+<p>进行垃圾回收时，让所有存活的对象都向一端移动</p>
+</li>
+<li><p>复制</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/68184091-13ff5f00-ffd9-11e9-80df-2cf300e279bd.png" alt="image"></p>
+<p>将内存划分为大小相等的两块，每次只使用其中一块，当这一块内存用完了就将还存活的对象复制到另一块上面，然 后再把使用过的内存空间进行一次清理。</p>
+<p>不足：内存只使用了一半。</p>
+<p>现代商业虚拟机中将新生代内存分为3块，一块比较大的<code>Eden</code>区，两块比较小的<code>Survivor</code>区，比例为<code>8：1：1</code>每次使用Eden区和其中一块Survivor区，在回收的时候将<code>Eden</code>和<code>Survivor</code>中的存活对象复制到另一块<code>Survivor</code>区上，然后清理<code>Eden</code>和使用过的那一块<code>Survivor</code>区，如果每次回收的对象过多导致另一块Survivor不够用，此时需要依赖老年代进行空间分配担保，也就是借用老年代的空间存储放不下的对象。</p>
+</li>
+<li><p>分代收集</p>
+<p>根据对象存活周期将内存划分为几块，不同的块采用适当的回收算法。</p>
+<p>为了更好得管理堆区域，一般将堆划分为新生代和老年代</p>
+<p>新生代使用：复制算法</p>
+<p>老年代使用：标记-清除、标记-整理算法</p>
+</li>
+</ol>
+</li>
+<li><p>内存分代：</p>
+<ol>
+<li>一个应用启动，操作系统会给他分配一个初始的内存大小，这部分内存大部分应该属于堆内存，JVM 为了更好地利用管理这部分内存，对该区域做了划分，一部分成为新生代，另一部分称为老年代。</li>
+<li>Minor GC：随着对象不断地创建，如果新生代没有空间创建新对象，将会发生的GC。</li>
+<li>Full GC：位于新生代的对象每经过一次Minor GC后，如果这个对象没有被回收，则自己的标记数+1，这个标记标记数用于表示这个对象经历了多少次的Minor GC，次数超过一定后，这个对象才会被移动到老年代，随着时间的推移，如果老年代也没有足够的空间容纳对象，老年代也会试着发生GC，这时候的GC叫做Full GC。</li>
+<li>相比 <code>Minor GC</code>，<code>Full GC</code> 发生的次数比较少，但是每发生一次 <code>Full GC</code>，整个堆内存区域都需要执行一次垃圾回收，这对程序性能造成的影响比 <code>Minor GC</code> 大很多，所以我们应该尽量避免或者减少 <code>Full GC</code> 的发生。同时，在堆内存区域，发生最多的 GC 情形就是新生代的 <code>Minor GC</code> 了，因为所有的对象会优先去新生代开辟空间，所以这块的内存变化会很快，只有内存不够用，就会发生 GC，但是一般的 <code>Minor GC</code>执行比 <code>Full GC</code> 快很多。因为两者使用的算法不同。</li>
+</ol>
+</li>
+<li><p>内存分配策略</p>
+<ol>
+<li><p>对象优先在Eden分配</p>
+<p>大多数情况下，对象在新生代Eden上分配，当Eden空间不足时，发起Minor GC。</p>
+</li>
+<li><p>大对象直接进入老年代</p>
+<p>大对象指的是需要连续内存空间的对象，最典型的大对象是那种很长的字符串以及数组，经常出现大对象会提前触发垃圾收集器以获取足够的连续空间分配给大对象。</p>
+<p><code>-XX：PretenureSizeThreshold</code>，大于此值的对象直接在老年代分配，避免在Eden和Survivor之间的大量内存复制。</p>
+</li>
+<li><p>动态对象年龄判定</p>
+<p>虚拟机并不是永远要求对象的年龄必须达到<code>MaxTenuringThreshold</code>才能晋升老年代，如果在Survivor中相同年龄所有对象大小的总和大于Survivor空间的一半，则年龄大于或等于该年龄的对象可以直接进入老年代。</p>
+</li>
+<li><p>空间分配担保</p>
+<p>在发生<code>Minor GC</code>之前，虚拟机先检查老年代大可用的连续空间是否大于新生代所有对象总空间，如果条件成立的 话，那么<code>Minor GC</code>可以确认是安全的。<br>如果不成立的话虚拟机会查看<code>HandlePromotionFailure</code>的值是否允许担保失败，如果允许那么就会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试着进行一次 <code>Minor GC</code>如果小 于，或者<code>HandlePromotionFailure</code>的值不允许冒险，那么就要进行一次<code>Full GC</code>。</p>
+</li>
+</ol>
+</li>
+<li><p>Full GC的触发条件</p>
+<ol>
+<li><p>调用System.gc()：</p>
+<p>只是建议虚拟机执行 Full GC，但是虚拟机不一定真正去执行。不建议使用这种方式，而是让虚拟机管理内存。</p>
+</li>
+<li><p>老年代空间不足：</p>
+<p>老年代空间不足的常见常见为前文所讲的大对象直接进入老年代、长期存活的对象进入老年代等。</p>
+<p>为了避免以上原因引起的 Full GC，应当尽量不要创建过大的对象以及数组。除此之外，可以通过调整虚拟机参数</p>
+<p><code>-Xmn</code>：虚拟机参数 调大新生代的大小，让对象尽量在新生代被回收掉，不进入老年代。</p>
+<p><code>-XX:MaxTenuringThreshold</code>：调大对 象进入老年代的年龄，让对象在新生代多存活一段时间。</p>
+</li>
+<li><p>空间分配担保失败：</p>
+<p>使用复制算法的<code>Minor GC</code>需要老年代的内存空间做担保，如果担保失败会执行一次<code>Full GC</code>。</p>
+</li>
+<li><p>JDK 1.7及以前的永久代空间不足</p>
+<p>在 JDK 1.7 及以前，<code>HotSpot</code> 虚拟机中的方法区是用永久代实现的，永久代中存放的为一些<code>Class</code>的信息、常量、静 态变量等数据。<br>当系统中要加载的类、反射的类和调用的方法较多时，永久代可能会被占满，在未配置为采用<code>CMS GC</code>的情况下也 会执行<code>Full GC</code>。如果经过<code>Full GC</code>仍然回收不了，那么虚拟机会抛出<code>java.lang.OutOfMemoryError</code>。 为避免以上原因引起的<code>Full GC</code>，可采用的方法为增大永久代空间或转为使用<code>CMS GC</code>。</p>
+</li>
+<li><p>Concurrent Mode Failure </p>
+<p>执行<code>CMS GC</code>的过程中同时有对象要放入老年代，而此时老年代空间不足（可能是GC过程中浮动垃圾过多导致暂时性的空间不足），便会报<code>Concurrent Mode Failure</code>错误，并触发 <code>Full GC。</code> </p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h2><ul>
+<li><p>背景：类是在运行期间第一次使用的时候动态加载的，而不是一次性加载所有的类。因为如果一次性加载，那么会占用很多的内存。</p>
+</li>
+<li><p>类的生命周期：</p>
+<p><img src="https://user-images.githubusercontent.com/42031559/68200464-e2978b00-fffa-11e9-802d-bd615fa6774a.png" alt="image"></p>
+<ol>
+<li><p>加载：</p>
+<ol>
+<li>通过类的完全限定名称获取定义该类的二进制字节流。</li>
+<li>将该字节流表示的静态存储结构转换为方法区的运行时存储结构。</li>
+<li>在内存中生成一个代表该类的Class对象，作为方法区中该类的各种数据的访问入口。</li>
+</ol>
+<p>其中二进制字节流可以从以下方式获取：</p>
+<ol>
+<li>从ZIP包中读取，成为JAR、EAR、WAR格式的基础。</li>
+<li>从网络中获取，最典型的应用是 <code>Applet</code>。</li>
+<li>运行时计算生成，例如动态代理技术，在 <code>java.lang.reﬂect.Proxy</code> 使用 <code>ProxyGenerator.generateProxyClass</code> 的代理类的二进制字节流。 </li>
+<li>由其他文件生成，比如由JSP文件生成对应的Class类。</li>
+</ol>
+</li>
+<li><p>验证：</p>
+<p>确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+</li>
+<li><p>准备：</p>
+<p>类变量是被<code>static</code>修饰的变量，准备阶段为类变量分配内存并设置初始值，使用的是方法区的内存。实例变量不会在这阶段分配内存，它会在对象实例化时随着对象一起被分配在堆中。应该注意到，实例化不是类加载 的一个过程，类加载发生在所有实例化操作之前，并且类加载只进行一次，实例化可以进行多次。</p>
+<p>初始值一般为 0 值，例如下面的类变量value被初始化为0而不是123。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> value = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果类变量是常量，那么它将初始化为表达式所定义的值而不是 0。例如下面的常量 value 被初始化为 123 而不是 0。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> value = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+</li>
+</ul>
 <h2 id="数组创建的步骤"><a href="#数组创建的步骤" class="headerlink" title="数组创建的步骤"></a>数组创建的步骤</h2><ul>
 <li>声明变量</li>
 <li>在堆中用new关键字初始化数组</li>
@@ -234,7 +393,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-09-08T07:48:54.649Z" itemprop="dateUpdated">2019-09-08 15:48:54</time>
+    Last updated: <time datetime="2019-11-05T11:54:39.898Z" itemprop="dateUpdated">2019-11-05 19:54:39</time>
 </span><br>
 
 
@@ -379,7 +538,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>faint-star &copy; 2015 - 2019</span>
+        <p><span>faint-star &copy; 2015 - 2020</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
